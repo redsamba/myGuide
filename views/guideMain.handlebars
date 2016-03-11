@@ -38,7 +38,50 @@
   <section>
     <h3>Accessing the API Content:</h3>
     <p>
+     With you key in hand, you will be able to set up the initial "options" JSON Object that contains much of the initial information
+     you need to make an https request. The request itself, as shown in the linked documentation, takes the "options" object and a
+     user specified callback function as parameters to determine what kind of info will be returned and how it will be processed. To
+     start off with the "options" object, you need to make sure that the "path" takes you to the right category and response types,
+     and that the API key is inserted in the appropriate spot as shown below:
+    </p>
+    <pre>
+      <code>
+      var options = {
+        host: 'www.igdb.com',
+        path: '/api/v1/games',
+        port: '443',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Token token=' + myApiKey
+        }
+      };
+      </code>
+    </pre>
+    <p>
+      In the above segment, you'll notice that the "path:" element has a part of a url as its value. The end of that url "/games",
+      is the part that you'll want to replace to access different types of categories and search results, which I will get into in
+      a little bit. But for now, you could swap out that segment with "/games/search" or "/companies" to access different parts of
+      the api. With the "options" object under way, you can then shift your focus to how the callback function will return the info
+      that you requested. A simple example is illustrated below:
       
+      <pre>
+        <code>
+          var callback = function(response){
+            var str = ''
+            response.on('data', function (chunk) {
+                str += chunk;
+            });
+            
+            response.on('end', function(){
+            
+              var obj = JSON.parse(str);
+              console.log(obj.games[9].name);
+            
+            });
+          
+          }
+        </code>
+      </pre>
     </p>
   </section>
   
