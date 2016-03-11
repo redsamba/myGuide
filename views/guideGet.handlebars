@@ -9,6 +9,71 @@
   the guide.</p>
   <section>
     <h3>Games:</h3>
+    <p>
+      Of the different types of GET requests that you can make, game requests have the most diverse set of return objects. The following
+      is a list of the different types of GET requests you can make in the games category:
+      <li>/games: This returns a list of all games in the database.</li>
+      <li>/games/meta: This returns the meta data for the games category.</li>
+      <li>/games/{gameid}: This returns a game object that matches a given Game's ID number.</li>
+      <li>/games/search: This returns a list of games that fit certain query parameters.</li>
+    </p>
+    <p>
+      The JSON object for a games search can differ a bit more than the other categories, but for the most part, each object contains
+      similar information, simply more or less of it depending on what type of GET request was made. For our purposes here, the JSON
+      object that is returned by the "/games/{gameid}" request has the most diverse range of information options that are returned,
+      and will serve as a good representation of what a games category JSON object might look like.
+    </p>
+    <pre>
+      <code>
+        {
+    "game": {
+        "id": 1979,
+        "name": "Battlefield 4",
+        "alternative_name": null,
+        "rating": 8.49847120072721,
+        "release_dates": [{
+            "platform_name": "PlayStation 3",
+            "release_date": "2013-10-29"
+        }, {
+            "platform_name": "PC Windows",
+            "release_date": "2013-10-29"
+        }, {
+            "platform_name": "Xbox 360",
+            "release_date": "2013-10-29"
+        }, {
+            "platform_name": "Playstation 4",
+            "release_date": "2013-11-15"
+        }, {
+            "platform_name": "Xbox One",
+            "release_date": "2013-11-22"
+        }],
+        "companies": [{
+            "developer": true,
+            "publisher": false,
+            "name": "EA Digital Illusions CE"
+        }, {
+            "developer": false,
+            "publisher": true,
+            "name": "Electronic Arts"
+        }],
+        "cover": "http://imgcdn.igdb.com/images/games/battlefield-4/battlefield-4_cover_thumb_at_igdb_com.jpg",
+        "screenshots": [{
+            "subtitle": "Ingame Screenshot",
+            "src": "http://imgcdn.igdb.com/images/games/battlefield-4/battlefield-4_screenshot_thumb_3502_at_igdb_com.jpg"
+        }, {
+            "subtitle": "Ingame Screenshot",
+            "src": "http://imgcdn.igdb.com/images/games/battlefield-4/battlefield-4_screenshot_thumb_3504_at_igdb_com.jpg"
+        }, {
+            "subtitle": "Ingame Screenshot",
+            "src": "http://imgcdn.igdb.com/images/games/battlefield-4/battlefield-4_screenshot_thumb_3503_at_igdb_com.jpg"
+        }, {
+            "subtitle": "Ingame Screenshot",
+            "src": "http://imgcdn.igdb.com/images/games/battlefield-4/battlefield-4_screenshot_thumb_3505_at_igdb_com.jpg"
+        }]
+    }
+}
+      </code>
+    </pre>
   </section>
 </article>
 <br>
