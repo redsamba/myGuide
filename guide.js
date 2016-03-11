@@ -16,6 +16,12 @@ app.get('/',function(req,res){
 
 });
 
+app.get('/Page1',function(req,res){
+
+  res.render('guideGet.handlebars');
+
+});
+
 app.listen(app.get('port'), function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
