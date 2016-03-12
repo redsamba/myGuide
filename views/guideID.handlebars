@@ -1,1 +1,122 @@
-
+<h1>ID Requests and ID Game Filter</h1>
+<br>
+<article>
+  <p>
+      In this section, I am going to discuss the purpose of searching a given object by its ID value, and what kind of uses that you can
+    implement with this type of GET Request. All of the five categories have an ID request, but only four of them can be filtered by the
+    games that are associated with a given category ID. The game category itself does not have this filter request, because it obviously
+    cannot filter itself with itself (i.e. I cannot get a set of game ID's from a game ID other than a set of itself and no other game).
+    However, since the database is called  the Internet Games Database, it stands to reason that all of the other categories are meant to
+    serve and focus on games themselves, and with that, lets get started with implementing a simple ID Request, and then afterward, filter
+    those results by the games associated with them in the database.
+  </p>
+  <section>
+    <h2>ID GET Requests</h2>
+    <br>
+    <p>
+        A lot of the JSON Object examples I showed you at the beginning, came from ID requests, and that is because instead of returning a
+      large list of objects with some data, I am requesting all of the information that the database has on a single object. A good usage
+      of this type of this request is finding the games associated with a given franchise, so we will use the franchise category a decent
+      illustration. Here is the request as a url query:
+    </p>
+    <span>https://www.igdb.com/api/v1/franchises/56?token={apikey}</span>
+    <p>
+      And here is a similar setup in javascript:
+    </p>
+    <pre>
+      <code>
+var fID = 56;        
+var options = {
+  host: 'www.igdb.com',
+  path: '/api/v1/franchises/' + fID,
+  port: '443',
+  headers: {
+    'Accept': 'application/json',
+    'Authorization': 'Token token=' + apikey
+  }
+};
+      </code>
+    </pre>
+    <p>
+        Combine this with an appropriate callback function that stores the returned franchise object, and you will receive the following
+      JSON object:
+    </p>
+    <pre>
+      <code>
+{
+  "franchise": {
+    "id": 56,
+    "name": "Dragon Ball",
+    "slug": "dragon-ball"
+  }
+}
+      </code>
+    </pre>
+    <p>
+        In any event, this isn't really all that helpful unless we specifically wanted general information about the dragon ball video
+      game franchise. And that is true for most ID requests that you make with this API. Even though you get a great deal of information
+      about that particular category object, the only category objects that really have any substantial info at all are the game objects
+      themselves. Sometimes people objects and company objects can have some interesting information, like biography info for people or
+      average game ratings by a given company, but the database is centered around games, and the amount of data within game objects is
+      quite apparent as previously shown. So why would we necessarily want to locate a single franchise if there is not a whole lot of 
+      info within its category object? Well....
+    </p>
+  </section>
+  <br>
+  <section>
+    <h2>Game Filter</h2>
+    <br>
+    <p>
+        If you get a specific category ID object, you can then jump around and use that Object to filter out the main game GET request.
+      Take the franchise example from above, if I know the franchise id for the Dragon Ball franchise, I can then use it to filter out
+      all of the games that are not apart of the Dragon Ball franchise from the general "/games" GET request, and only receive a response
+      object that contains an array of all Dragon Ball games. Lets just start off with a simple url string to illustrate how to use this
+      kind of request:
+    </p>
+    <span>https://www.igdb.com/api/v1/franchises/56/games?limit=5&offset=10&token={apikey}</span>
+    <p>
+        First notice how we can use the parameters in the "/games" request like we would normally do if we requested the full list of 
+      games from the database. In the above example, I wanted to essentially return all Dragon Ball games in alphanumeric order starting
+      with the 10th game in the ordered list, and I only want to display five games total. This results in the followning JSON object
+      being returned:
+    </p>
+    <pre>
+      <code>
+{
+  "games": [
+    {
+      "id": 2563,
+      "name": "Dragon Ball Z: Budokai",
+      "slug": "dragon-ball-z-budokai",
+      "release_date": "2002-11-02"
+    },
+    {
+      "id": 2564,
+      "name": "Dragon Ball Z: Budokai 2",
+      "slug": "dragon-ball-z-budokai-2",
+      "release_date": "2003-11-14"
+    },
+    {
+      "id": 2566,
+      "name": "Dragon Ball Z: Budokai 3",
+      "slug": "dragon-ball-z-budokai-3",
+      "release_date": "2004-11-16"
+    },
+    {
+      "id": 2253,
+      "name": "Dragon Ball Z: Budokai Tenkaichi",
+      "slug": "dragon-ball-z-budokai-tenkaichi",
+      "release_date": "2005-10-06"
+    },
+    {
+      "id": 2252,
+      "name": "Dragon Ball Z: Budokai Tenkaichi 2",
+      "slug": "dragon-ball-z-budokai-tenkaichi-2",
+      "release_date": "2006-10-05"
+    }
+  ]
+}
+      </code>
+    </pre>
+  </section>
+</article>
