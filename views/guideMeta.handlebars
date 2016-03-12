@@ -22,7 +22,19 @@
       franchise objects within the response object. So if you have a thousand franchises in the list, you would only be able to access
       the first 25 of them, and by default they are ordered by there name value alphanumerically. In order to traverse the whole list
       of objects, you would need to ensure that you set the offset parameter. The offset parameter simply tells where to start the 
-      retrieval of the list inside of the franchise database.
+      retrieval of the list inside of the franchise database. So if I wanted to start in the middle of the list, and the list has a 
+      total of 1000 objects in it, then I would need to set the offset parameter to 499 (the general object returned contains an object
+      called franchises, which is itself an array of franchise objects. So you will need to work with the appropriate array index to get
+      to the place where you want to start.)
+    </p>
+    <span>https://www.igdb.com/api/v1/franchises?limit=10&offset=499token={!insert api key here!}</span>
+    <p>
+      As you can see above the offset parameter is set to 499, but there is also a limit parameter as well. The limit parameter is a
+      useful parameter for a general request, because it can limit the number of objects that are returned to you. So in the above
+      example you have 10 franchise objects that are returned with the GET request, and you start at the 501st franchise. The important
+      thing to remember about the limit and offset parameters, is that if you are having to retreive all 500 franchise objects in total,
+      you would have to set up some kind of loop that would take 50 total requests. As a side note, the largest limit size (and also 
+      default size of the request) is 25.
     </p>
   </section>
 </article>
