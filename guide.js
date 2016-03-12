@@ -34,6 +34,12 @@ app.get('/Page3',function(req,res){
 
 });
 
+app.get('/Page4',function(req,res){
+
+  res.render('guideSearch.handlebars');
+
+});
+
 app.listen(app.get('port'), function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
