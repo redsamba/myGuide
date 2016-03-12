@@ -1,7 +1,7 @@
 <h1>GET Request Category Types</h1>
 <br>
 <article>
-  <p>On this page we are going to discuss the different kinds of GET Requests that you can make with this api, what kinds of categories
+  <p>On this page we are going to discuss the different kinds of GET Requests that you can make with this API, what kinds of categories
   they fit under, and what type of data it can return. There are a total of five categories of GET requests: Games, Companies, People,
   Franchises, and Platforms. Each category covers all kinds of relevent data to specific video games, and the companies and individuals 
   who design and distribute those games. We'll primarily cover the kinds of information that is returned in the JSON object, but we will
@@ -20,8 +20,8 @@
     <p>
       The JSON object for a games search can differ a bit more than the other categories, but for the most part, each object contains
       similar information, simply more or less of it depending on what type of GET request was made. For our purposes here, the JSON
-      object that is returned by the "/games/{gameid}" request has the most diverse range of information options that are returned,
-      and will serve as a good representation of what a games category JSON object might look like.
+      object that is returned by the "/games/{gameid}" request has the most diverse range of information options that are available,
+      and will serve as a good representation of what a game category JSON object might look like.
     </p>
     <pre>
       <code>
@@ -87,7 +87,7 @@
     </pre>
     <p>
       The primary things to notice here in the game JSON object, is the game id, name, and release_date. This is the basic info that
-      identifies a game and is the most consistently used times of data in the games category responses. Things like genre, companies,
+      identifies a game and are the most consistently used types of data in the game category responses. Things like genre, companies,
       and themes are actually arrays of JSON objects and you will have to use the proper coding methods to access the data inside of 
       those arrays.
     </p>
@@ -97,7 +97,7 @@
     <h3>Companies:</h3>
     <p>
       The companies category, and the rest of the categories on this list, are fairly straight foreward and are very similar to one
-      another in terms of how the api handles their different requests. Still, here is a quick list of the different GET requests in
+      another in terms of how the API handles their different requests. Still, here is a quick list of the different GET requests in
       the companies category:
       <li>/companies: Returns a list of all companies.</li>
       <li>/companies/meta: Returns the meta data for the companies category.</li>
@@ -226,7 +226,7 @@
   <section>
     <h3>People:</h3>
     <p>
-      From here on out, I'll just briefly pass on  the remaining categories starting with the people category. This category can handle
+      From here on out, I'll just briefly pass by the remaining categories starting with the people category. This category can handle
       GET requests for well known individuals in the game industry as well as the games that they are known for. Similar to the 
       companies category, here are the different type of GET requests available:
       <li>/people: Returns a list of all people from the database.</li>
@@ -258,7 +258,7 @@
     <h3>Franchises and Platforms:</h3>
     <p>
       By now an overall framework should be taking shape with regards to the categories and their respective GET request methods.
-      To finish off this overview, and to cement the idea that the real strength of the api lies more within the request type than a
+      To finish off this overview, and to cement the idea that the real strength of the API lies more within the request type than a
       specific category, here are the following methods for both the franchise and platform requests as well as an example for each.
     </p>
     <section>
@@ -296,7 +296,7 @@
         <li>/platforms/{platformid}/games: Returns a list of games that belongs to a certain platform.</li>
         For the most part you would really only use either the "/platforms" or "/platforms/{platformid}/games" GET request to either
         see a list of all platforms that are stored in the data base, or what games would be associated with a given platform. But to
-        show specifically whats in a platform JSON Object, the following response was retreived with the "/platforms/{platformid}":
+        show specifically what's in a platform JSON Object, the following response was retreived with the "/platforms/{platformid}":
       </p>
       <pre>
         <code>
