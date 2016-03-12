@@ -28,6 +28,12 @@ app.get('/Page2',function(req,res){
 
 });
 
+app.get('/Page3',function(req,res){
+
+  res.render('guideID.handlebars');
+
+});
+
 app.listen(app.get('port'), function(){
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
