@@ -92,9 +92,135 @@
       those arrays.
     </p>
   </section>
+  <br>
   <section>
-    <h3></h3>
+    <h3>Companies:</h3>
+    <p>
+      The companies category, and the rest of the categories on this list, are fairly straight foreward and are very similar to one
+      another in terms of how the api handles their different requests. Still, here is a quick list of the different GET requests in
+      the companies category:
+      <li>/companies: Returns a list of all companies.</li>
+      <li>/companies/meta: Returns the meta data for the companies category.</li>
+      <li>/companies/{companyid}: Returns a company object that corresponds to the id.</li>
+      <li>/companies/{companyid}/games: Returns a list of all the games made by that company.</li>
+    </p>
+    <p>
+      The new type of search here is the last one in the list. With this GET request you do not access any company information 
+      directly, but rather a brief list of all the games that a company has made. This type of search is a good way to locate different
+      game ids, which can then be used to link a game to its company on your website. Below are two examples of the different types
+      of JSON objects that are related to companies. The first is a "/companies/{companyid}" search and shows the kind of data you
+      can typically find in a company request, and the second is an example of what a "/companies/{companyid}/games" request can look
+      like:
+    </p>
+    <h4>Company JSON Object:</h4>
+    <pre>
+      <code>
+        {
+  "company": {
+    "id": 13,
+    "name": "Demiurge Studios",
+    "slug": "demiurge-studios",
+    "average_rating": "8.64974214493147",
+    "parent": null
+  }
+}
+      </code>
+    </pre>
+    <br>
+    <pre>
+      <code>
+        {
+  "games": [
+    {
+      "id": 5716,
+      "name": "Advent Rising",
+      "slug": "advent-rising",
+      "release_date": "2005-05-31"
+    },
+    {
+      "id": 20,
+      "name": "BioShock",
+      "slug": "bioshock",
+      "release_date": "2007-08-21"
+    },
+    {
+      "id": 498,
+      "name": "Borderlands",
+      "slug": "borderlands",
+      "release_date": "2009-10-20"
+    },
+    {
+      "id": 4730,
+      "name": "Brothers in Arms: Double Time",
+      "slug": "brothers-in-arms-double-time",
+      "release_date": "2008-09-23"
+    },
+    {
+      "id": 617,
+      "name": "Brothers in Arms: Earned in Blood",
+      "slug": "brothers-in-arms-earned-in-blood",
+      "release_date": "2005-10-04"
+    },
+    {
+      "id": 619,
+      "name": "Brothers in Arms: Road to Hill 30",
+      "slug": "brothers-in-arms-road-to-hill-30",
+      "release_date": "2005-03-01"
+    },
+    {
+      "id": 2694,
+      "name": "Green Day: Rock Band",
+      "slug": "green-day-rock-band",
+      "release_date": "2010-06-08"
+    },
+    {
+      "id": 7084,
+      "name": "Marvel Puzzle Quest",
+      "slug": "marvel-puzzle-quest",
+      "release_date": "2013-10-03"
+    },
+    {
+      "id": 73,
+      "name": "Mass Effect",
+      "slug": "mass-effect",
+      "release_date": "2007-11-20"
+    },
+    {
+      "id": 13784,
+      "name": "Mass Effect: Bring Down the Sky",
+      "slug": "mass-effect-bring-down-the-sky",
+      "release_date": "2008-03-11"
+    },
+    {
+      "id": 13781,
+      "name": "Mass Effect: Pinnacle Station",
+      "slug": "mass-effect-pinnacle-station",
+      "release_date": "2009-08-25"
+    },
+    {
+      "id": 13105,
+      "name": "Puzzle & Glory",
+      "slug": "puzzle-and-glory",
+      "release_date": "2015-09-24"
+    },
+    {
+      "id": 11643,
+      "name": "Shoot Many Robots",
+      "slug": "shoot-many-robots",
+      "release_date": "2012-03-14"
+    },
+    {
+      "id": 8311,
+      "name": "Titan Quest",
+      "slug": "titan-quest",
+      "release_date": "2006-06-26"
+    }
+  ]
+}
+      </code>
+    </pre>
   </section>
+  
 </article>
 <br>
 <span>
