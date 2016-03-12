@@ -4,7 +4,7 @@
     In this section of the guide we will finally be able to go forward with actually implementing something useful with the IGDB API. I 
     won't be doing anything too fancy with it, but it should be quite obvious the potential it can have for any website that either buys
     or sells video games, or retains a list of information about video games. Specifically in this section of the guide I will discuss the
-    primary GET Request that all of the API Categories have and which how they might be useful. I will also briefly cover the Meta request
+    primary GET Request that all of the API Categories have and how they might be useful. I will also briefly cover the Meta request
     and its usages in conjunction with the General request.
   </p>
   <section>
@@ -18,7 +18,7 @@
     <span>https://www.igdb.com/api/v1/franchises?token={!insert api key here!}</span>
     <p>
       In this particular query, we are simply requesting that a list of all franchises be returned as a JSON Object, along with all of the
-      pertinent data that it contains. The one caviet to this particular request, however, is that it can only return a maximum of 25 
+      pertinent data that it contains. The one caveat to this particular request, however, is that it can only return a maximum of 25 
       franchise objects within the response object. So if you have a thousand franchises in the list, you would only be able to access
       the first 25 of them, and by default they are ordered by there name value alphanumerically. In order to traverse the whole list
       of objects, you would need to ensure that you set the offset parameter. The offset parameter simply tells where to start the 
@@ -146,7 +146,7 @@
       </code>
     </pre>
     <p>
-        By taking the code from above, and adding the variable dataSize as the upper limit of the control loop, I am able to print out
+        I can take the code from above, and add the variable dataSize as the upper limit of the control loop, then I am able to print out
       most of the company objects inside of the database in about 921 requests. There is not a whole lot here in the meta Object that
       gets returned, but it can be quite useful for when you need to consider a category's number of objects for your own website's
       personal uses. In the next section we will start to cover the ID GET Request and it's applications.
