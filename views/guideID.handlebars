@@ -6,7 +6,7 @@
     implement with this type of GET Request. All of the five categories have an ID request, but only four of them can be filtered by the
     games that are associated with a given category ID. The game category itself does not have this filter request, because it obviously
     cannot filter itself with itself (i.e. I cannot get a set of game ID's from a game ID other than a set of itself and no other game).
-    However, since the database is called  the Internet Games Database, it stands to reason that all of the other categories are meant to
+    However, since the database is called the Internet Games Database, it stands to reason that all of the other categories are meant to
     serve and focus on games themselves, and with that, lets get started with implementing a simple ID Request, and then afterward, filter
     those results by the games associated with them in the database.
   </p>
@@ -16,7 +16,7 @@
     <p>
         A lot of the JSON Object examples I showed you at the beginning, came from ID requests, and that is because instead of returning a
       large list of objects with some data, I am requesting all of the information that the database has on a single object. A good usage
-      of this type of this request is finding the games associated with a given franchise, so we will use the franchise category a decent
+      of this type of this request is finding the games associated with a given franchise, so we will use the franchise category as a decent
       illustration. Here is the request as a url query:
     </p>
     <span>https://www.igdb.com/api/v1/franchises/56?token={apikey}</span>
@@ -53,7 +53,7 @@ var options = {
       </code>
     </pre>
     <p>
-        In any event, this isn't really all that helpful unless we specifically wanted general information about the dragon ball video
+        In any event, this isn't really all that helpful unless we specifically wanted general information about the Dragon Ball video
       game franchise. And that is true for most ID requests that you make with this API. Even though you get a great deal of information
       about that particular category object, the only category objects that really have any substantial info at all are the game objects
       themselves. Sometimes people objects and company objects can have some interesting information, like biography info for people or
@@ -175,7 +175,7 @@ var options = {
     </pre>
   </section>
   <p>
-      This does seem to have limits, however, as it does not seem like I can use the other game category features to do a more thorough
+      This does seem to have limits, however, as it does not seem like you can use the other game category features to do a more thorough
     search. For example I cannot get the number of game objects associated with a given franchise object by using the following url
     string:
   </p>
