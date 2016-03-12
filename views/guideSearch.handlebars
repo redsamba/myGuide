@@ -25,7 +25,7 @@
     <p>
         Overall though, the thing to take away from all of this is that there are filters and there are fields, and the filters act upon
       the specified fields in the search query to locate game information within the database. Say I wanted to know what games from the
-      Legend of Zelda were on the Nintendo 64. I could use both the search term zelda, the platform field, and the filter contains to
+      Legend of Zelda were on the Nintendo 64. I could use both the search term zelda, the platform field, and the filter "contains" to
       narrow down my search results with the following url string:
     </p>
     <span>https://www.igdb.com/api/v1/games/search?q=zelda&filters[platforms.name_cont]=64&token={apikey}</span>
@@ -33,7 +33,7 @@
         In the above url, we start with the search GET request statement "games/search". By adding the query parameters "?q=zelda" I 
       declare that I am searching for video games with zelda somewhere in their name. Both of those structures are fairly straight 
       forward, but the "&filters[platforms.name_cont]=64" is the section that will let us narrow it down to games that have the name
-      zelda on a platform with 64 in the title. The section "platforms.name" specifies that we are wanting to look at the name values
+      zelda on a platform with 64 in the platform title. The section "platforms.name" specifies that we are wanting to look at the name values
       of platform objects. The "_cont" filter lets us clarify that we want the platform name to contain a certain type of value, and the
       "=64" states that the value we want the platform name to contain is the number 64. Now unless there was a Zelda game title on the
       Commadore 64, we would almost certainly get the zelda games located on the Nintendo 64. The JSON Object returned by this type of
@@ -119,7 +119,7 @@
         The two primary things to take note in this code segment, is that I can break up the url string into logical chunks and assign
       a specific string to those variables and string them together to form the above query in the options object. I did this just to
       show how one could begin to modularize the different parts of the search request query with different kinds of inputs and checks
-      to make a more elaborate search method, but for now it just assigns the key components of the example query to variables and 
+      to make a more elaborate search method. But for now it just assigns the key components of the example query to variables, and then 
       appends them together to make one long string path that will take us to where we need to make our request. Once that has been done,
       it is simply a matter of separating out the search results and from the response object, pushing them into the qParams array, and
       printing the search results to the console. Again a more robust guide could be written to focus soley on the search aspect of this
@@ -143,7 +143,7 @@
       to implement other types of databases that are centered around a similar theme, such as movies, music, or books. You could easily
       swap out the API categories with things like: book, author, publishing company, series, and format and use the exact same GET
       Request methods to organize a database about literature. So even though this guide may have just touched on one websites particular
-      video game theme, its underlying structure can help you understand other types requests in a large number of other databases. I 
+      video game theme, its underlying structure can help you understand other types of requests in a large number of other databases. I 
       hope you have fun looking for video games! Farewell for now.
     </p>
   </section>
