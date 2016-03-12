@@ -1,1 +1,153 @@
+<h1>Search Requests and the Shop Feature</h1>
+<br>
+<article>
+  <p>
+      In this final section of the guide, we will take a look at the search GET request for the games category, how it works, and some of its
+    potential usages. The search request is unique to the games category and is the only request that is unique to any of the five categories,
+    but from this particular request you can eventually find and access some of the other API categories as well. I will also briefly touch
+    on the shops API, which is a separate feature of the IGDB site, but its implementation could be described in its own guide and so I will
+    just cover some of its potential.
+  </p>
+  <section>
+    <h2>Search GET Requests</h2>
+    <br>
+    <p>
+        As mentioned above, a search feature is only relevant to the game category, and it focuses much of its attention on keyword queries
+      and comparing them to certain category fields within the search parameters. The IGDB Documentation website linked at the beginning of
+      this guide has a full list of all the different types of filters and search fields that go into this particular GET request so I will
+      not go into all of them in great detail, but I will at least highlight a few of them and give an overall understanding of the types of
+      filters and fields that you may need to be aware of:
+      <li>Comparator Filters: (i.e. < > <= >=) They act only on numerical values and can be used to compare things like game ID numbers and review scores.</li>
+      <li>Contains Filters: These filters check to see if a certain field contains either a certain value or search term.</li>
+      <li>Fields: Fields can vary from a few of the actual API categories, to more specific game information like review ratings, content ratings,
+      keywords, and genres.</li>
+    </p>
+    <p>
+        Overall though, the thing to take away from all of this is that there are filters and there are fields, and the filters act upon
+      the specified fields in the search query to locate game information within the database. Say I wanted to know what games from the
+      Legend of Zelda were on the Nintendo 64. I could use both the search term zelda, the platform field, and the filter contains to
+      narrow down my search results with the following url string:
+    </p>
+    <span>https://www.igdb.com/api/v1/games/search?q=zelda&filters[platforms.name_cont]=64&token={apikey}</span>
+    <p>
+        In the above url, we start with the search GET request statement "games/search". By adding the query parameters "?q=zelda" I 
+      declare that I am searching for video games with zelda somewhere in their name. Both of those structures are fairly straight 
+      forward, but the "&filters[platforms.name_cont]=64" is the section that will let us narrow it down to games that have the name
+      zelda on a platform with 64 in the title. The section "platforms.name" specifies that we are wanting to look at the name values
+      of platform objects. The "_cont" filter lets us clarify that we want the platform name to contain a certain type of value, and the
+      "=64" states that the value we want the platform name to contain is the number 64. Now unless there was a Zelda game title on the
+      Commadore 64, we would almost certainly get the zelda games located on the Nintendo 64. The JSON Object returned by this type of
+      request would look like this:
+    </p>
+    <pre>
+      <code>
+{
+  "games": [
+    {
+      "id": 1030,
+      "name": "The Legend of Zelda: Majora's Mask",
+      "slug": "the-legend-of-zelda-majora-s-mask",
+      "release_date": "2000-04-27",
+      "cover": "http://res.cloudinary.com/igdb/image/upload/t_thumb/j8ub6tu3j7lzdri2hynn.png",
+      "cover_id": "j8ub6tu3j7lzdri2hynn"
+    },
+    {
+      "id": 1029,
+      "name": "The Legend of Zelda: Ocarina of Time",
+      "slug": "the-legend-of-zelda-ocarina-of-time",
+      "release_date": "1998-11-21",
+      "cover": "http://res.cloudinary.com/igdb/image/upload/t_thumb/shusfaev6gpjuskum2vp.png",
+      "cover_id": "shusfaev6gpjuskum2vp"
+    }
+  ]
+}
+      </code>
+    </pre>
+    <p>
+        Now you could create a somewhat sophisticated javascript program that would take html input from a user, check that input with a
+      corresponding field, search term, or filter (i.e. like an advanced search tab on a website), and then build the search query from
+      the user's input and then print those results. For this guide, however, I am only going to show a simple illustration of how to 
+      implement the search GET request, as you could actually have a guide dedicated to just the subject of the search request, and that
+      goes beyond the scope of our purposes here. Below is another similar code example to the others I have shown before, but it shows
+      how one might go about getting these search terms into a get request:
+    </p>
+    <pre>
+      <code>
+        var https = require('https');
+        var keyWord = 'zelda';
+        var field = 'platforms.name_cont';
+        var filterVal = '64';
+        
+        var options = {
+          host: 'www.igdb.com',
+          path: '/api/v1/games/search?q='+ keyWord '&filters[' + field + ']=' + filterVal, 
+          port: '443',
+          headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Token token="123"'
+          }
+        };
+        
+        callback = function(response) {
+          var str = ''
+          response.on('data', function (chunk) {
+            str += chunk;
+          });
+  
+          response.on('end', function () {
+            myGames = JSON.parse(str);
+            console.log(str);
+    
+            var qParams = [];
+            for(var i = 0; i < myGames.games.length; i++){
+      
+              for (var p in myGames.games[i]){
+                qParams.push({'name':p,'value':(myGames.games[i])[p]});
+                console.log("Name: " + p  + (myGames.games[i])[p]);
+              }
+      
+            }
+          });
+  
+        }
+        
+        var req = https.request(options, callback);
+        req.end()
+      </code>
+    </pre>
+    <p>
+        The two primary things to take note in this code segment, is that I can break up the url string into logical chunks and assign
+      a specific string to those variables and string them together to form the above query in the options object. I did this just to
+      show how one could begin to modularize the different parts of the search request query with different kinds of inputs and checks
+      to make a more elaborate search method, but for now it just assigns the key components of the example query to variables and 
+      appends them together to make one long string path that will take us to where we need to make our request. Once that has been done,
+      it is simply a matter of separating out the search results and from the response object, pushing them into the qParams array, and
+      printing the search results to the console. Again a more robust guide could be written to focus soley on the search aspect of this
+      API, but this is a good starting point to making effective searches with javascript.
+    </p>
+  </section>
+  <br>
+  <section>
+    <h2>Shops API and Closing Thoughts</h2>
+    <p>
+        As promised above, there is also a separate shops API that IGDB offers that can be used by different game vendors and companies to
+      compare prices of games with the IGDB Price Comparison feature. Once it has been set up, it can be used to handle JSON Objects and
+      other formats to process certain types of data about a given game, like its price, the currency value of the price, its availability,
+      and other pertinent information about a game's economic value. Here is a link to the API website and a more detailed explanation of
+      its functionality:
+    </p>
+    <a href="https://www.igdb.com/api/v1/documentation/shops">Shops API</a>
+    <p>
+        The final point I'd like to make about the IGDB API, is the similarities it has with other databases. The fact that the database
+      focuses on an overarching set of data, and relates that base with other types of data sets, makes this API a good example of how
+      to implement other types of databases that are centered around a similar theme, such as movies, music, or books. You could easily
+      swap out the API categories with things like: book, author, publishing company, series, and format and use the exact same GET
+      Request methods to organize a database about literature. So even though this guide may have just touched on one websites particular
+      video game theme, its underlying structure can help you understand other types requests in a large number of other databases. I 
+      hope you have fun looking for video games! Farewell for now.
+    </p>
+  </section>
+</article>
+<br>
+<a href="http://52.25.239.188:3000/Page3"><--Previous Page<--</a>
 
