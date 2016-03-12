@@ -27,7 +27,7 @@
       called franchises, which is itself an array of franchise objects. So you will need to work with the appropriate array index to get
       to the place where you want to start.)
     </p>
-    <span>https://www.igdb.com/api/v1/franchises?limit=10&offset=499token={!insert api key here!}</span>
+    <span>https://www.igdb.com/api/v1/franchises?limit=10&offset=499&token={!insert api key here!}</span>
     <p>
       As you can see above the offset parameter is set to 499, but there is also a limit parameter as well. The limit parameter is a
       useful parameter for a general request, because it can limit the number of objects that are returned to you. So in the above
@@ -108,7 +108,49 @@
   </section>
   <br>
   <section>
-    
+    <h2>Meta GET Requests</h2>
+    <p>
+        These simple type of requests can be found in all of the five categories, and they have a relatively simple purpose. All they do
+      is return the size of a given category in a JSON Object. So say I make the following call:  
+    </p>
+    <span>https://www.igdb.com/api/v1/people/meta?{!insert api key here!}</span>
+    <p>
+        All this request would return, if printed to the console, would be the following JSON Object:
+    </p>
+    <pre>
+      <code>
+        {
+          "size": 109083
+        }
+      </code>
+    </pre>
+    <p>
+        The value of "size" in the above example is roughly the total number of people objects that are found in the people category
+      within the database. So say I made a "/companies/meta" request and then stored it into an object or variable called "dataSize",
+      I could then use that variable to control the j for loop from above to get the total number of companies printed to the console
+      and stored in the array of qParams. As of this guide's creation, there are a total of 9,218 companies within the database, and 
+      for the sake of this thought experiment, I will lower it to 9,210 for ease of use. By tweaking the following code segment below:
+    </p>
+    <pre>
+      <code>
+        var req;
+        //dataSize contains the value returned by "/companies/meta" rounded down.
+        dataSize = dataSize / 10;
+        for(var j = 0; j < dataSize; j ++){
+          
+          req = req = https.request(options, callback);
+          req.end();
+          offset = offset + 10;
+        
+        }
+      </code>
+    </pre>
+    <p>
+        By taking the code from above, and adding the variable dataSize as the upper limit of the control loop, I am able to print out
+      most of the company objects inside of the database in about 921 requests. There is not a whole lot here in the meta Object that
+      gets returned, but it can be quite useful for when you need to consider a category's number of objects for your own website's
+      personal uses. In the next section we will start to cover the ID GET Request and it's applications.
+    </p>
   </section>
 </article>
 <br>
