@@ -222,6 +222,99 @@
     </pre>
   </section>
   
+  <br>
+  <section>
+    <h3>People:</h3>
+    <p>
+      From here on out, I'll just briefly pass on  the remaining categories starting with the people category. This category can handle
+      GET requests for well known individuals in the game industry as well as the games that they are known for. Similar to the 
+      companies category, here are the different type of GET requests available:
+      <li>/people: Returns a list of all people from the database.</li>
+      <li>/people/meta: Returns the meta data for the people category.</li>
+      <li>/people/{personid}: Returns a person object matching the person id.</li>
+      <li>/people/{personid)/games: Returns a list of games that the person has been involved with.</li>
+    </p>
+    <p>
+      As you can see it is almost identical to the companies setup design, but simply returns different types of objects like the one
+      provided below which was done with a "/people/{personid}" request:
+    </p>
+    <pre>
+      <code>
+{
+  "person": {
+    "id": 322,
+    "name": "David DeMartini",
+    "slug": "david-demartini",
+    "dob": null,
+    "country": null,
+    "bio": null
+  }
+}
+      </code>
+    </pre>
+  </section>
+  <br>
+  <section>
+    <h3>Franchises and Platforms:</h3>
+    <p>
+      By now an overall framework should be taking shape with regards to the categories and their respective GET request methods.
+      To finish off this overview, and to cement the idea that the real strength of the api lies more within the request type than a
+      specific category, here are the following methods for both the franchise and platform requests as well as an example for each.
+    </p>
+    <section>
+      <h4>Franchise:</h4>
+      <p>
+        The franchise category groups games that are intentionally designed to be related to each other in some way. Such as the Call
+        of Duty franchise or the Legend of Zelda franchise. Here is a list of its GET requests:
+        <li>/franchises: Returns a list of all franchises from the database.</li>
+        <li>/franchises/meta: Returns the meta data for the franchises category.</li>
+        <li>/franchises/{franchiseid}: Returns a franchise object matching the franchise id.</li>
+        <li>/franchises/{franchiseid}/games: Returns a list of games that belongs to a certain franchise.</li>
+        <br>
+        Here is an example of a franchise object:
+      </p>
+      <pre>
+        <code>
+          {
+            "franchise": {
+             "id": 9,
+            "name": "Tom Clancy",
+            "slug": "tom-clancy"
+            }
+          }
+        </code>
+      </pre>
+    </section>
+    <br>
+    <section>
+      <h4>Platforms:</h4>
+      <p>
+        The platform category can make requests for all of the different video game platforms and return there relevant information:
+        <li>/platforms: Returns a list of all platforms from the database.</li>
+        <li>/platforms/meta: Returns the meta data for the platforms category.</li>
+        <li>/platforms/{platformid}: Returns a platform object matching the platform id.</li>
+        <li>/platforms/{platformid}/games: Returns a list of games that belongs to a certain platform.</li>
+        For the most part you would really only use either the "/platforms" or "/platforms/{platformid}/games" GET request to either
+        see a list of all platforms that are stored in the data base, or what games would be associated with a given platform. But to
+        show specifically whats in a platform JSON Object, the following response was retreived with the "/platforms/{platformid}":
+      </p>
+      <pre>
+        <code>
+          {
+            "platform": {
+            "id": 67,
+            "name": "Intellivision",
+            "slug": "intellivision"
+            }
+          }
+        </code>
+      </pre>
+    </section>
+  </section>
+  <p>
+    Up next, we will finally take a look at how the GET requests themselves work, and some useful ideas on how to use the information
+    that they provide.
+  </p>
 </article>
 <br>
 
