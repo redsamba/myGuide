@@ -36,5 +36,82 @@
       you would have to set up some kind of loop that would take 50 total requests. As a side note, the largest limit size (and also 
       default size of the request) is 25.
     </p>
+    <p>
+      With all of this being said, lets see this being applied in a more applicable manner. Lets say that I have it set up to where
+      the following options were set up within my options object:
+    </p>
+    <pre>
+      <code>
+        var https = require('https');
+        var offset = 0;
+
+        var options = {
+          host: 'www.igdb.com',
+          path: '/api/v1/companies?limit=10&offset=' + offset,
+          port: '443',
+          headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Token token="123"'
+          }
+        };
+      </code>
+    </pre>
+    <p>
+        Up above we have a simple variable called offset, and it is set to be added to the path string in the options object. At first
+      this should only return the first 10 companies that are held within the database. But if we tweeked the last bit of code below:
+    </p>
+    <pre>
+      <code>
+        callback = function(response) {
+          var str = ''
+          response.on('data', function (chunk) {
+            str += chunk;
+          });
+  
+          response.on('end', function () {
+            myGames = JSON.parse(str);
+            console.log(str);
+    
+            var qParams = [];
+            for(var i = 0; i < 25; i++){
+      
+              for (var p in myGames.companies[i]){
+                qParams.push({'name':p,'value':(myGames.companies[i])[p]});
+                console.log("Name: " + p  + (myGames.companies[i])[p]);
+              }
+      
+            }
+          });
+  
+        }
+        
+        var req;
+        for(var j = 0; j < 10; j++){
+          
+          req = req = https.request(options, callback);
+          req.end();
+          offset = offset + 10;
+        
+        }
+      </code>
+    </pre>
+    <p>
+        Essentially in the above code segment, since the return limit is set to 10, and the offset is increased by 10 within each
+      iteration of the j for loop, I am able to return and print about 100 company objects to the console and store them within the 
+      qParams array. The primary usage for this is that I can control how many objects I can get and how far into the overall list of
+      companies I can go. As shown on the previous page, this GET request feature is available to all of the five categories and is
+      especially useful for looking up the platform category, as there are not as many platform items within the database as compared
+      to the other categories. But how can you find out how many objects exist within a given category, and how can you apply that to the
+      code itself, especially since the database can change quite a bit over time? The answer is in the meta GET request and I will briefly
+      cover how it works, as there is not a whole lot there.
+    </p>
+  </section>
+  <br>
+  <section>
+    
   </section>
 </article>
+<br>
+<span>
+  <a href="http://52.25.239.188:3000/Page1"><--Previous Page<--</a><span>   </span> <a href="http://52.25.239.188:3000/Page2">-->Next Page--></a>
+</span>
