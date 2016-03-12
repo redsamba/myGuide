@@ -12,8 +12,8 @@
   </p>
   <p>The following pages will cover not so much how to search for the individual item categories (i.e. Games, franchises, people
   etc.), but instead each section will focus on the different ways that these categories can be queried and displayed as many of them
-  are practically identical to each other. But for now, we will start with a brief overview of how to access the api and its components,
-  and then discuss what each category is and what kind of JSON objects that they can return.
+  are practically identical to each other. But for now, we will start with a brief overview of how to access the API and its components,
+  and then discuss what each category is and what kind of JSON Objects that they can return.
   </p>
   <br>
   <section>
@@ -23,15 +23,15 @@
       forward process if you go to the link provided above and follow these steps:
       <li>If you have not done so already, you can go ahead and make your own account with the website.</li>
       <br>
-      <li>From the main documentation page linked above, you'll want to locate the "manage api keys" link in the top left corner.</li>
+      <li>From the main documentation page linked above, you'll want to locate the "manage API keys" link in the top left corner.</li>
       <br>
       <li>Once you have an account, you should be taken to the screen where you'll see a link to request and API Key.</li>
       <br>
-      <li>On this next page, just provide the info below (i.e. what domains will you use, how will you use the api etc.).</li>
+      <li>On this next page, just provide the info below (i.e. what domains will you use, how will you use the API etc.).</li>
       <br>
       <li>Submit the form and wait for the key to be approved, this can take about a day or so.</li>
       <br>
-      <li>Once you have been approved, the key will be listed the next time you select "manage api keys".</li>
+      <li>Once you have been approved, the key will be listed the next time you select "manage API keys".</li>
     </p>
   </section>
   <br>
@@ -62,7 +62,7 @@
       In the above segment, you'll notice that the "path:" element has a part of a url as its value. The end of that url "/people",
       is the part that you'll want to replace to access different types of categories and search results, which I will get into in
       a little bit. But for now, you could swap out that segment with "/games/search" or "/companies" to access different parts of
-      the api. With the "options" object under way, you can then shift your focus to how the callback function will return the info
+      the API. With the "options" object under way, you can then shift your focus to how the callback function will return the info
       that you requested. A simple example is illustrated below:
      </p> 
       <pre>
@@ -91,12 +91,12 @@
       <p>
         In the above example, what you are essentially doing in that callback function is allowing the request to return a response
         in "chunks" and add it to a string variable. These "chunks" will keep on being added to the string until the response itself
-        has finally finished and sent the last little bit, and now the string variable "str" now contains a string version of the 
-        JSON object that contains all of the search information we queried for. By parsing the string, the "obj" variable can now be
+        has finally finished and sent the last little bit, and the string variable "str" will contain a string version of the 
+        JSON object that holds all of the search information we queried for. By parsing the string, the "obj" variable can now be
         used to access different parts of the response object's information. The value that is printed to the console in the above
         section of code is essentially the name of the 10th person returned in the response object. With the callback function written
-        out, both it and the "options" object can be passed into the https.request functions parameters to actually make the request
-        itself. Now it is time to shift focus to the actual GET request types that can be made in this api and what kind of information
+        out, both it and the "options" object can be passed into the https.request function parameters to actually make the request
+        itself. Now it is time to shift focus to the actual GET request types that can be made in this API and what kind of information
         that they return.
       </p>
   </section>
